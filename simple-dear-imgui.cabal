@@ -1,0 +1,82 @@
+cabal-version:       2.2
+name:                simple-dear-imgui
+version:             0.1.0
+synopsis:            A minimalist game engine.
+description:         A minimalist game engine providing a window configured with dear-imgui.
+license:             MIT
+license-file:        LICENSE
+author:              Tristan de Cacqueray
+maintainer:          tristan.cacqueray@gmail.com
+category:            Game
+homepage:            https://github.com/TristanCacqueray/simple-dear-imgui
+bug-reports:         https://github.com/TristanCacqueray/simple-dear-imgui/issues
+build-type:          Simple
+extra-doc-files:     README.md
+                     ChangeLog.md
+tested-with:         GHC == 9.2.8
+                      || == 9.4.5
+
+source-repository head
+  type:                git
+  location:            https://github.com/TristanCacqueray/simple-dear-imgui.git
+
+common common
+  default-language:    GHC2021
+  ghc-options:         -Wall -Wno-partial-type-signatures
+  if impl(ghc >= 8.0)
+    ghc-options:       -Wcompat
+                       -Widentities
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wredundant-constraints
+  if impl(ghc >= 8.2)
+    ghc-options:       -fhide-source-paths
+  if impl(ghc >= 8.4)
+    ghc-options:       -Wpartial-fields
+
+  default-extensions:
+    BlockArguments
+    ImportQualifiedPost
+    LambdaCase
+    PartialTypeSignatures
+    OverloadedStrings
+    OverloadedRecordDot
+    DerivingStrategies
+    MultiWayIf
+
+executable simple-dear-imgui
+  import:              common
+  main-is:             Main.hs
+  hs-source-dirs:      app
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base < 5,
+                       simple-dear-imgui
+
+library
+  import:              common
+  ghc-options:         -Wno-unused-packages
+  build-depends:       base < 5
+                       -- base enhancement
+                     , rio < 2
+                     , lens < 6
+                     , unliftio < 2
+                     , managed < 2
+                     , mtl < 3
+                     , transformers < 2
+                     , text < 3
+                     , witch < 2
+                       -- image
+                     , vector < 2
+                     , massiv < 2
+                     , massiv-io < 2
+                     , Color < 2
+                     , JuicyPixels < 4
+                       -- drawing
+                     , sdl2 < 3
+                     , dear-imgui < 3
+                     , StateVar
+                     , gl < 2
+                     , hsnoise < 2
+
+  exposed-modules:     SimpleDearImgui
+  hs-source-dirs:      src
