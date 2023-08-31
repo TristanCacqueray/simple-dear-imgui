@@ -50,7 +50,10 @@ executable simple-dear-imgui
   hs-source-dirs:      app
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base < 5,
-                       simple-dear-imgui
+                       simple-dear-imgui,
+                       rio,
+                    dear-imgui, simple-dear-imgui, Color
+                     , hsnoise < 2
 
 library
   import:              common
@@ -78,5 +81,8 @@ library
                      , gl < 2
                      , hsnoise < 2
 
-  exposed-modules:     SimpleDearImgui
+  exposed-modules:     SimpleDearImGui
+                       SimpleDearImGui.Core
+                       SimpleDearImGui.Texture
+                       SimpleDearImGui.Controller
   hs-source-dirs:      src
